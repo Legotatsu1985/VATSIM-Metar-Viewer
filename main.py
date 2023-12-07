@@ -80,17 +80,17 @@ def metar_find_temp_dewpoint(metar_string_text):
         dewpoint = res.group()[3:]
         metar_temp.config(text="気温: " + temp + "C")
         metar_dewpoint.config(text="露点: " + dewpoint + "C")
-    elif re.search(r'(M[0-9]{2}/M[0-9]{,3})', metar_string_text):
-        res = re.search(r'(M[0-9]{2}/M[0-9]{,3})', metar_string_text)
-        temp = res.group()[1:3]
-        dewpoint = res.group()[5:]
-        metar_temp.config(text="気温: -" + temp + "C")
-        metar_dewpoint.config(text="露点: -" + dewpoint + "C")
     elif re.search(r'([0-9]{2}/M[0-9]{,3})', metar_string_text):
         res = re.search(r'([0-9]{2}/M[0-9]{,3})', metar_string_text)
         temp = res.group()[:2]
         dewpoint = res.group()[4:]
         metar_temp.config(text="気温: " + temp + "C")
+        metar_dewpoint.config(text="露点: -" + dewpoint + "C")
+    elif re.search(r'(M[0-9]{2}/M[0-9]{,3})', metar_string_text):
+        res = re.search(r'(M[0-9]{2}/M[0-9]{,3})', metar_string_text)
+        temp = res.group()[1:3]
+        dewpoint = res.group()[5:]
+        metar_temp.config(text="気温: -" + temp + "C")
         metar_dewpoint.config(text="露点: -" + dewpoint + "C")
 
 def metar_find_altimeter(metar_string_text):
