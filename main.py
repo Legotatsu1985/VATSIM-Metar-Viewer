@@ -86,9 +86,8 @@ def metar_find_visibility(list_metar):
         metar_visibility.config(text="地上視程(m): " + metar_visibility_raw)
 
 def metar_find_temp_dewpoint(metar_string_text):
-    if re.search(r'(^[0-9]{2}/[0-9]{,3})', metar_string_text):
-        res = re.search(r'(^[0-9]{2}/[0-9]{,3})', metar_string_text)
-        print(res.group())
+    if re.search(r'([0-9]{2}/[0-9]{,3})', metar_string_text):
+        res = re.search(r'([0-9]{2}/[0-9]{,3})', metar_string_text)
         temp = res.group()[:2]
         dewpoint = res.group()[3:]
         metar_temp.config(text="気温: " + temp + "C")
