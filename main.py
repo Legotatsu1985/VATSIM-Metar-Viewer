@@ -86,12 +86,34 @@ def metar_find_visibility(list_metar):
         metar_visibility.config(text="地上視程(m): " + metar_visibility_raw)
 
 def metar_find_temp_dewpoint(metar_string_text):
-    if re.search(r'([0-9]{2}/[0-9]{,3})', metar_string_text):
-        res = re.search(r'([0-9]{2}/[0-9]{,3})', metar_string_text)
-        temp = res.group()[:2]
-        dewpoint = res.group()[3:]
-        metar_temp.config(text="気温: " + temp + "C")
-        metar_dewpoint.config(text="露点: " + dewpoint + "C")
+    temp_dewpoint_combo_MM = r'(M[0-9]{2}/M[0-9]{,3})'
+    temp_dewpoint_combo_MP = r'(M[0-9]{2}/[0-9]{,3})'
+    temp_dewpoint_combo_PM = r'([0-9]{2}/M[0-9]{,3})'
+    temp_dewpoint_combo_PP = r'([0-9]{2}/[0-9]{,3})'
+    if re.search(temp_dewpoint_combo_MM, metar_string_text):
+        res = re.search(temp_dewpoint_combo_MM, metar_string_text)
+        temp_minus = "-" + res.group()[1:3]
+        dewpoint_minus = "-" - res.group()[5:]
+        metar_temp.config(text="気温: " + temp_minus)
+        metar_dewpoint.config(text="露点: " + dewpoint_minus)
+    elif re.search(temp_dewpoint_combo_MP, metar_string_text):
+        res = re.search(temp_dewpoint_combo_MP, metar_string_text)
+        temp_minus = "-" + res.group()[1:3]
+        dewpoint_plus = res.group()[4:]
+        metar_temp.config(text="気温: " + temp_minus)
+        metar_dewpoint.config(text="露点: " + dewpoint_plus)
+    elif re.search(temp_dewpoint_combo_PM, metar_string_text):
+        res = re.search(temp_dewpoint_combo_PM, metar_string_text)
+        temp_plus = res.group()[:2]
+        dewpoint_minus = "-" + res.group()[4:]
+        metar_temp.config(text="気温: " + temp_plus)
+        metar_dewpoint.config(text="露点: " + dewpoint_minus)
+    else:
+        res = re.search(temp_dewpoint_combo_PP, metar_string_text)
+        temp_plus = res.group()[:2]
+        dewpoint_plus = res.group()[3:]
+        metar_temp.config(text="気温: " + temp_plus)
+        metar_dewpoint.config(text="露点: " + dewpoint_plus)
 
 def metar_find_altimeter(metar_string_text):
     if re.search(r'A([0-9]{4})', metar_string_text):
