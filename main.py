@@ -80,7 +80,6 @@ def metar_find_visibility(list_metar):
             else:
                 metar_visibility_raw = list_metar[3]
     
-    print(metar_visibility_raw)
     if metar_visibility_raw == "9999":
         metar_visibility.config(text="地上視程: 10km以上")
     else:
