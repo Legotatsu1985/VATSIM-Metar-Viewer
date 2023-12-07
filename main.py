@@ -47,10 +47,10 @@ def metar_find_wind(list_metar):
     
     wind_direction = metar_wind_raw[0:3]
     wind_speed = metar_wind_raw[3:5]
-    if metar_wind_raw[7:9] == "":
+    if metar_wind_raw[7:] == "":
         metar_wind.config(text="風量と風速: " + wind_direction + "@" + wind_speed + "KT")
     else:
-        wind_gust = metar_wind_raw[7:9]
+        wind_gust = metar_wind_raw[6:8]
         metar_wind.config(text="風量と風速: " + wind_direction + "@" + wind_speed + "KT" + wind_gust + "G")
         
 
