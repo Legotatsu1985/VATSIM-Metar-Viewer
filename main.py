@@ -37,7 +37,7 @@ def metar_find_obs_time(list_metar):
     obs_day = metar_obs_time_raw[0:2] #オブザベーション日のみ取得
     obs_time_hour = metar_obs_time_raw[2:4] #オブザベーション時間のみ取得
     obs_time_minute = metar_obs_time_raw[4:6] #オブザベーション分のみ取得
-    metar_obs_time.config(text="発出時間(UTC): " + obs_day + "日" + obs_time_hour + "時" + obs_time_minute + "分")
+    metar_obs_time.config(text="発出時間(Zulu): " + obs_day + "日" + obs_time_hour + "時" + obs_time_minute + "分")
 
 def metar_find_wind(list_metar):
     if list_metar[2] == "AUTO":
@@ -139,7 +139,7 @@ def metar_find_altimeter(metar_string_text):
 root = tkinter.Tk()
 root.title("VATSIM Metar Fetcher")
 root.geometry("500x300")
-entry_airport_label = tkinter.Label(root, text="ICAOコード")
+entry_airport_label = tkinter.Label(root, text="↓ICAOコードを入力↓")
 entry_airport_label.pack()
 entry_airport_label_fyi = tkinter.Label(root, text="（北アメリカのMETARは正常に表示されない可能性あり）")
 entry_airport_label_fyi.pack()
