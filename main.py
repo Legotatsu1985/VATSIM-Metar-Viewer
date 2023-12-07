@@ -93,7 +93,7 @@ def metar_find_temp_dewpoint(metar_string_text):
     if re.search(temp_dewpoint_combo_MM, metar_string_text):
         res = re.search(temp_dewpoint_combo_MM, metar_string_text)
         temp_minus = "-" + res.group()[1:3]
-        dewpoint_minus = "-" - res.group()[5:]
+        dewpoint_minus = "-" + res.group()[5:]
         metar_temp.config(text="気温: " + temp_minus)
         metar_dewpoint.config(text="露点: " + dewpoint_minus)
     elif re.search(temp_dewpoint_combo_MP, metar_string_text):
