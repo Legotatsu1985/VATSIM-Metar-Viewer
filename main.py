@@ -58,15 +58,27 @@ def metar_find_visibility(list_metar):
     if list_metar[2] == "AUTO":
         metar_visibility_find = list_metar[4]
         if "V" in metar_visibility_find:
-            metar_visibility_raw = list_metar[5]
+            if list_metar[5] == "CAVOK":
+                metar_visibility_raw = "9999"
+            else:
+                metar_visibility_raw = list_metar[5]
         else:
-            metar_visibility_raw = list_metar[4]
+            if list_metar[4] == "CAVOK":
+                metar_visibility_raw = "9999"
+            else:
+                metar_visibility_raw = list_metar[4]
     else:
         metar_visibility_find = list_metar[3]
         if "V" in metar_visibility_find:
-            metar_visibility_raw = list_metar[4]
+            if list_metar[4] == "CAVOK":
+                metar_visibility_raw = "9999"
+            else:
+                metar_visibility_raw = list_metar[4]
         else:
-            metar_visibility_raw = list_metar[3]
+            if list_metar[3] == "CAVOK":
+                metar_visibility_raw = "9999"
+            else:
+                metar_visibility_raw = list_metar[3]
     
     if metar_visibility_raw == "9999":
         metar_visibility.config(text="地上視程: 10km以上")
