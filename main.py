@@ -57,7 +57,7 @@ def metar_find_wind(list_metar):
 def metar_find_visibility(list_metar):
     if list_metar[2] == "AUTO":
         metar_visibility_find = list_metar[4]
-        if "V" in metar_visibility_find:
+        if re.search(r'([0-9]{3}V[0-9]{3})', metar_visibility_find):
             if list_metar[5] == "CAVOK":
                 metar_visibility_raw = "9999"
             else:
@@ -69,7 +69,7 @@ def metar_find_visibility(list_metar):
                 metar_visibility_raw = list_metar[4]
     else:
         metar_visibility_find = list_metar[3]
-        if "V" in metar_visibility_find:
+        if re.search(r'([0-9]{3}V[0-9]{3})', metar_visibility_find):
             if list_metar[4] == "CAVOK":
                 metar_visibility_raw = "9999"
             else:
