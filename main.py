@@ -121,8 +121,8 @@ def metar_find_temp_dewpoint(metar_string_text):
 
 def metar_find_altimeter_hPa(metar_string_text):
     res = re.search(r'Q([0-9]{4})', metar_string_text)
-    hPa = res.group()
-    metar_altimetar_hPa.config(text=hPa)
+    hPa = res.group()[1:]
+    metar_altimetar_hPa.config(text="QNH(hPa): " + hPa)
 
 def metar_find_altimeter_inHg(metar_string_text):
     if re.search(r'A([0-9]{4})', metar_string_text):
@@ -131,7 +131,7 @@ def metar_find_altimeter_inHg(metar_string_text):
         QNH_first = QNH_raw[:2]
         QNH_last = QNH_raw[2:]
         QNH = QNH_first + "." + QNH_last
-        metar_altimeter_inHg.config(text="QNH: " + QNH)
+        metar_altimeter_inHg.config(text="QNH(inHg): " + QNH)
     else:
         res = re.search(r'Q([0-9]{4})', metar_string_text)
         hPa = res.group()[1:]
