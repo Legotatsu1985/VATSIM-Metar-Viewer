@@ -177,27 +177,31 @@ def vmc_imc(list_metar, metar_string_text):
     get_ceiling_OVC = re.search(OVC, metar_string_text)
     get_ceiling_VV = re.search(VV, metar_string_text)
     if get_ceiling_BKN:
-        BKN_number = get_ceiling_BKN.group()[4:]
-        print(BKN_number)
-        if BKN_number <= 10:
-            print("Closely IMC")
+        BKN_number_raw = get_ceiling_BKN.group()[3:4]
+        if BKN_number_raw == 0:
+            BKN_number = get_ceiling_BKN.group()[4:]
+            if BKN_number <= 10:
+                print("TRUE")
+            else:
+                print("FALSE")
         else:
-            print("VMC")
+            print("FALSE")
     elif get_ceiling_OVC:
-        OVC_number = get_ceiling_OVC.group()[4:]
-        print(OVC_number)
-        if OVC_number <= 10:
-            print("Closely IMC")
-        else:
-            print("VMC")
+        OVC_number_raw = get_ceiling_OVC.group()[3:4]
+        if OVC_number_raw == 0:
+            OVC_number = get_ceiling_OVC.group()[4:]
+            if OVC_number <= 10:
+                print("TRUE")
+            else:
+                print("FALSE")
     elif get_ceiling_VV:
-        VV_number = get_ceiling_VV.group()[4:]
-        print(VV_number)
-        if VV_number <=10:
-            print("Closely IMC")
-        else:
-            print("VMC")
-    
+        VV_number_raw = get_ceiling_VV.group()[2:3]
+        if VV_number_raw == 0:
+            VV_number = get_ceiling_VV.group()[3:]
+            if VV_number <= 10:
+                print("TRUE")
+            else:
+                print("FALSE")
 
 root = tkinter.Tk()
 root.title("VATSIM Metar Fetcher")
