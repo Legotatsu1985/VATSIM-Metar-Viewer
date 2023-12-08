@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 
 
 def fetch_metar():
-    if len(entry_airport_icao.get()) <= 3:
+    if len(entry_airport_icao.get()) <= 3: #入力したICAOコードが3桁以下の場合（ICAOコードを読み込めない）
         print("METAR not found")
         metar_fetched_time_label.config(text="")
         metar_result_string.config(text="METAR取得失敗（空港が存在しないか、METARが発出されていません。）")
@@ -17,11 +17,11 @@ def fetch_metar():
         metar_temp.config(text="")
         metar_dewpoint.config(text="")
         metar_altimeter.config(text="")
-    else:
-        url = "http://metar.vatsim.net/metar.php?id=" + entry_airport_icao.get()
-        res = urllib.request.urlopen(url)
-        metar_string_raw = BeautifulSoup(res, 'html.parser')
-        current_time = datetime.datetime.now()
+    else: #ICAOコードが4桁である
+        url = "http://metar.vatsim.net/metar.php?id=" + entry_airport_icao.get() #VATSIMメータphpリンクとICAOコードを加算
+        res = urllib.request.urlopen(url) #URLを検索
+        metar_string_raw = BeautifulSoup(res, 'html.parser') #VATSIMメータphpよりメーターテキストを採取
+        current_time = datetime.datetime.now() #現在時刻を取得
         current_time_formatted = current_time.strftime('最終取得(ローカル時間): %Y年%m月%d日 %H時%M分')
         print(current_time, metar_string_raw)
         metar_string_text = metar_string_raw.get_text()
@@ -165,4 +165,8 @@ metar_dewpoint = tkinter.Label(root, justify="left")
 metar_dewpoint.pack()
 metar_altimeter = tkinter.Label(root, justify="left")
 metar_altimeter.pack()
+info_label = tkinter.Label(root, text="Made by Legotatsu with Tkinter", fg="blue", anchor=tkinter.S)
+info_label.pack()
+version_label = tkinter.Label(root, text="v1.1", anchor=tkinter.SE)
+version_label.pack()
 root.mainloop()
