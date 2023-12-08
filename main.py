@@ -178,8 +178,10 @@ def vmc_imc(list_metar, metar_string_text):
     get_ceiling_VV = re.search(VV, metar_string_text)
     if get_ceiling_BKN:
         BKN_number_raw = get_ceiling_BKN.group()[4:5]
+        print(BKN_number_raw)
         if BKN_number_raw == 0:
             BKN_number = get_ceiling_BKN.group()[5:]
+            print(BKN_number)
             if BKN_number <= 10:
                 print("TRUE")
             else:
