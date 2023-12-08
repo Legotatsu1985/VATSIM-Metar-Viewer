@@ -178,18 +178,21 @@ def vmc_imc(list_metar, metar_string_text):
     get_ceiling_VV = re.search(VV, metar_string_text)
     if get_ceiling_BKN:
         BKN_number = get_ceiling_BKN.group()[4:]
+        print(BKN_number)
         if BKN_number <= 10:
             print("Closely IMC")
         else:
             print("VMC")
     elif get_ceiling_OVC:
         OVC_number = get_ceiling_OVC.group()[4:]
+        print(OVC_number)
         if OVC_number <= 10:
             print("Closely IMC")
         else:
             print("VMC")
     elif get_ceiling_VV:
         VV_number = get_ceiling_VV.group()[4:]
+        print(VV_number)
         if VV_number <=10:
             print("Closely IMC")
         else:
