@@ -14,6 +14,8 @@ def fetch_metar():
         metar_obs_time.config(text="")
         metar_wind.config(text="")
         metar_visibility.config(text="")
+        metar_temp.config(text="")
+        metar_dewpoint.config(text="")
         metar_altimeter.config(text="")
     else:
         url = "http://metar.vatsim.net/metar.php?id=" + entry_airport_icao.get()
