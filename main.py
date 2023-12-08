@@ -167,6 +167,34 @@ def vmc_imc(list_metar, metar_string_text):
     
     print(metar_visibility_raw)
     
+    BKN = r'(BKN[0-9]{3})'
+    BKN_unknown = "BKN///"
+    OVC = r'(OVC[0-9]{3})'
+    OVC_unknown = "OVC///"
+    VV = r'(VV[0-9]{3})'
+    VV_unknown = "VV///"
+    get_ceiling_BKN = re.search(BKN, metar_string_text)
+    get_ceiling_OVC = re.search(OVC, metar_string_text)
+    get_ceiling_VV = re.search(VV, metar_string_text)
+    if get_ceiling_BKN:
+        BKN_number = get_ceiling_BKN[4:]
+        if BKN_number <= 10:
+            print("Closely IMC")
+        else:
+            print("VMC")
+    elif get_ceiling_OVC:
+        OVC_number = get_ceiling_OVC[4:]
+        if OVC_number <= 10:
+            print("Closely IMC")
+        else:
+            print("VMC")
+    elif get_ceiling_VV:
+        VV_number = get_ceiling_VV[4:]
+        if VV_number <=10:
+            print("Closely IMC")
+        else:
+            print("VMC")
+    
 
 root = tkinter.Tk()
 root.title("VATSIM Metar Fetcher")
