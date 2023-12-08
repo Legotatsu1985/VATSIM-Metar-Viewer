@@ -142,7 +142,7 @@ def metar_find_altimeter_inHg(metar_string_text):
         for line in lines:
             if hPa in line:
                 QNH = line[5:]
-                metar_altimeter_inHg.config(text="QNH: " + QNH)
+                metar_altimeter_inHg.config(text="QNH(inHg): " + QNH)
 
 
 
