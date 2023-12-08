@@ -139,71 +139,7 @@ def metar_find_altimeter(metar_string_text):
                 QNH = line[5:]
                 metar_altimeter.config(text="QNH: " + QNH)
 
-def vmc_imc(list_metar, metar_string_text):
-    if list_metar[2] == "AUTO":
-        metar_visibility_find = list_metar[4]
-        if re.search(r'([0-9]{3}V[0-9]{3})', metar_visibility_find):
-            if list_metar[5] == "CAVOK":
-                metar_visibility_raw = "9999"
-            else:
-                metar_visibility_raw = list_metar[5]
-        else:
-            if list_metar[4] == "CAVOK":
-                metar_visibility_raw = "9999"
-            else:
-                metar_visibility_raw = list_metar[4]
-    else:
-        metar_visibility_find = list_metar[3]
-        if re.search(r'([0-9]{3}V[0-9]{3})', metar_visibility_find):
-            if list_metar[4] == "CAVOK":
-                metar_visibility_raw = "9999"
-            else:
-                metar_visibility_raw = list_metar[4]
-        else:
-            if list_metar[3] == "CAVOK":
-                metar_visibility_raw = "9999"
-            else:
-                metar_visibility_raw = list_metar[3]
-    
-    print(metar_visibility_raw)
-    
-    BKN = r'(BKN[0-9]{3})'
-    BKN_unknown = "BKN///"
-    OVC = r'(OVC[0-9]{3})'
-    OVC_unknown = "OVC///"
-    VV = r'(VV[0-9]{3})'
-    VV_unknown = "VV///"
-    get_ceiling_BKN = re.search(BKN, metar_string_text)
-    get_ceiling_OVC = re.search(OVC, metar_string_text)
-    get_ceiling_VV = re.search(VV, metar_string_text)
-    if get_ceiling_BKN:
-        BKN_number_raw = get_ceiling_BKN.group()[4:5]
-        print(BKN_number_raw)
-        if BKN_number_raw == 0:
-            BKN_number = get_ceiling_BKN.group()[5:]
-            print(BKN_number)
-            if BKN_number <= 10:
-                print("TRUE")
-            else:
-                print("FALSE")
-        else:
-            print("FALSE")
-    elif get_ceiling_OVC:
-        OVC_number_raw = get_ceiling_OVC.group()[4:5]
-        if OVC_number_raw == 0:
-            OVC_number = get_ceiling_OVC.group()[4:]
-            if OVC_number <= 10:
-                print("TRUE")
-            else:
-                print("FALSE")
-    elif get_ceiling_VV:
-        VV_number_raw = get_ceiling_VV.group()[3:4]
-        if VV_number_raw == 0:
-            VV_number = get_ceiling_VV.group()[4:]
-            if VV_number <= 10:
-                print("TRUE")
-            else:
-                print("FALSE")
+
 
 root = tkinter.Tk()
 root.title("VATSIM Metar Fetcher")
