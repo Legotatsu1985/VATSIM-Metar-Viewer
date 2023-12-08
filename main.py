@@ -28,11 +28,13 @@ def fetch_metar():
         metar_fetched_time_label.config(text=current_time_formatted)
         metar_result_string.config(text=metar_string_text, fg="blue")
         root.after(300000, fetch_metar)
-        metar_find_obs_time(metar_string_text.split())
-        metar_find_wind(metar_string_text.split())
-        metar_find_visibility(metar_string_text.split())
+        list_metar = metar_string_text.split()
+        metar_find_obs_time(list_metar)
+        metar_find_wind(list_metar)
+        metar_find_visibility(list_metar)
         metar_find_temp_dewpoint(metar_string_text)
         metar_find_altimeter(metar_string_text)
+        vmc_imc(list_metar, metar_string_text)
         
 def metar_find_obs_time(list_metar):
     metar_obs_time_raw = list_metar[1] #オブザベーション日時のみ取得
@@ -136,7 +138,35 @@ def metar_find_altimeter(metar_string_text):
             if hPa in line:
                 QNH = line[5:]
                 metar_altimeter.config(text="QNH: " + QNH)
-        
+
+def vmc_imc(list_metar, metar_string_text):
+    if list_metar[2] == "AUTO":
+        metar_visibility_find = list_metar[4]
+        if re.search(r'([0-9]{3}V[0-9]{3})', metar_visibility_find):
+            if list_metar[5] == "CAVOK":
+                metar_visibility_raw = "9999"
+            else:
+                metar_visibility_raw = list_metar[5]
+        else:
+            if list_metar[4] == "CAVOK":
+                metar_visibility_raw = "9999"
+            else:
+                metar_visibility_raw = list_metar[4]
+    else:
+        metar_visibility_find = list_metar[3]
+        if re.search(r'([0-9]{3}V[0-9]{3})', metar_visibility_find):
+            if list_metar[4] == "CAVOK":
+                metar_visibility_raw = "9999"
+            else:
+                metar_visibility_raw = list_metar[4]
+        else:
+            if list_metar[3] == "CAVOK":
+                metar_visibility_raw = "9999"
+            else:
+                metar_visibility_raw = list_metar[3]
+    
+    print(metar_visibility_raw)
+    
 
 root = tkinter.Tk()
 root.title("VATSIM Metar Fetcher")
