@@ -16,7 +16,7 @@ def fetch_metar():
         metar_visibility.config(text="")
         metar_temp.config(text="")
         metar_dewpoint.config(text="")
-        metar_altimeter.config(text="")
+        metar_altimeter_inHg.config(text="")
     else: #ICAOコードが4桁である
         url = "http://metar.vatsim.net/metar.php?id=" + entry_airport_icao.get() #VATSIMメータphpリンクとICAOコードを加算
         res = urllib.request.urlopen(url) #URLを検索
@@ -33,7 +33,8 @@ def fetch_metar():
         metar_find_wind(list_metar)
         metar_find_visibility(list_metar)
         metar_find_temp_dewpoint(metar_string_text)
-        metar_find_altimeter(metar_string_text)
+        metar_find_altimeter_hPa(metar_string_text)
+        metar_find_altimeter_inHg(metar_string_text)
         
 def metar_find_obs_time(list_metar):
     metar_obs_time_raw = list_metar[1] #オブザベーション日時のみ取得
@@ -118,14 +119,19 @@ def metar_find_temp_dewpoint(metar_string_text):
         metar_temp.config(text="気温: " + temp_plus)
         metar_dewpoint.config(text="露点: " + dewpoint_plus)
 
-def metar_find_altimeter(metar_string_text):
+def metar_find_altimeter_hPa(metar_string_text):
+    res = re.search(r'Q([0-9]{4})', metar_string_text)
+    hPa = res.group()
+    metar_altimetar_hPa.config(text=hPa)
+
+def metar_find_altimeter_inHg(metar_string_text):
     if re.search(r'A([0-9]{4})', metar_string_text):
         res = re.search(r'A([0-9]{4})', metar_string_text)
         QNH_raw = res.group()[1:]
         QNH_first = QNH_raw[:2]
         QNH_last = QNH_raw[2:]
         QNH = QNH_first + "." + QNH_last
-        metar_altimeter.config(text="QNH: " + QNH)
+        metar_altimeter_inHg.config(text="QNH: " + QNH)
     else:
         res = re.search(r'Q([0-9]{4})', metar_string_text)
         hPa = res.group()[1:]
@@ -136,7 +142,7 @@ def metar_find_altimeter(metar_string_text):
         for line in lines:
             if hPa in line:
                 QNH = line[5:]
-                metar_altimeter.config(text="QNH: " + QNH)
+                metar_altimeter_inHg.config(text="QNH: " + QNH)
 
 
 
@@ -165,8 +171,10 @@ metar_temp = tkinter.Label(root, justify="left")
 metar_temp.pack()
 metar_dewpoint = tkinter.Label(root, justify="left")
 metar_dewpoint.pack()
-metar_altimeter = tkinter.Label(root, justify="left")
-metar_altimeter.pack()
+metar_altimetar_hPa = tkinter.Label(root, justify="left")
+metar_altimetar_hPa.pack()
+metar_altimeter_inHg = tkinter.Label(root, justify="left")
+metar_altimeter_inHg.pack()
 info_label = tkinter.Label(root, text="Made by Legotatsu with Tkinter", fg="blue", anchor=tkinter.S)
 info_label.pack()
 version_label = tkinter.Label(root, text="v1.1", anchor=tkinter.SE)
