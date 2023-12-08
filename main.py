@@ -34,7 +34,6 @@ def fetch_metar():
         metar_find_visibility(list_metar)
         metar_find_temp_dewpoint(metar_string_text)
         metar_find_altimeter(metar_string_text)
-        vmc_imc(list_metar, metar_string_text)
         
 def metar_find_obs_time(list_metar):
     metar_obs_time_raw = list_metar[1] #オブザベーション日時のみ取得
