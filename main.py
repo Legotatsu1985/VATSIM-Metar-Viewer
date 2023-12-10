@@ -16,7 +16,7 @@ def fetch_metar():
         metar_visibility.config(text="")
         metar_temp.config(text="")
         metar_dewpoint.config(text="")
-        metar_altimetar_hPa(text="")
+        metar_altimetar_hPa.config(text="")
         metar_altimeter_inHg.config(text="")
     else: #ICAOコードが4桁である
         url = "http://metar.vatsim.net/metar.php?id=" + entry_airport_icao.get() #VATSIMメータphpリンクとICAOコードを加算
