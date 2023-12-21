@@ -10,7 +10,7 @@ def fetch_metar():
     if len(entry_airport_icao.get()) <= 3: #入力したICAOコードが3桁以下の場合（ICAOコードを読み込めない）
         print("METAR not found")
         metar_fetched_time_label.config(text="")
-        metar_result_string.config(text="METAR取得失敗（空港が存在しないか、METARが発出されていません。）")
+        metar_result_string.config(text="METAR取得失敗（空港が存在しないか、METARが発出されていません。）", fg="")
         metar_obs_time.config(text="")
         metar_wind.config(text="")
         metar_visibility.config(text="")
@@ -121,9 +121,12 @@ def metar_find_temp_dewpoint(metar_string_text):
         metar_dewpoint.config(text="露点: " + dewpoint_plus)
 
 def metar_find_altimeter_hPa(metar_string_text):
-    res = re.search(r'Q([0-9]{4})', metar_string_text)
-    hPa = res.group()[1:]
-    metar_altimetar_hPa.config(text="QNH(hPa): " + hPa)
+    if re.search(r'Q([0-9]{4})', metar_string_text):
+        res = re.search(r'Q([0-9]{4})', metar_string_text)
+        hPa = res.group()[1:]
+        metar_altimetar_hPa.config(text="QNH(hPa): " + hPa)
+    else:
+        metar_altimetar_hPa.config(text="")
 
 def metar_find_altimeter_inHg(metar_string_text):
     if re.search(r'A([0-9]{4})', metar_string_text):
