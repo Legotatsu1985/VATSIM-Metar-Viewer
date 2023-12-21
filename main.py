@@ -56,7 +56,7 @@ def metar_find_wind(list_metar):
         metar_wind.config(text="風量と風速: " + wind_direction + "@" + wind_speed + "KT")
     else:
         wind_gust = metar_wind_raw[6:8]
-        metar_wind.config(text="風量と風速: " + wind_direction + "@" + wind_speed + "KT" + wind_gust + "G")
+        metar_wind.config(text="風量と風速: " + wind_direction + "@" + wind_speed + "G" + wind_gust + "KT")
         
 
 def metar_find_visibility(list_metar):
