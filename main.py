@@ -10,7 +10,7 @@ def fetch_metar():
     if len(entry_airport_icao.get()) <= 3: #入力したICAOコードが3桁以下の場合（ICAOコードを読み込めない）
         print("METAR not found")
         metar_fetched_time_label.config(text="")
-        metar_result_string.config(text="METAR取得失敗（空港が存在しないか、METARが発出されていません。）", fg="")
+        metar_result_string.config(text="METAR取得失敗（空港が存在しないか、METARが発出されていません。）", fg="black")
         metar_obs_time.config(text="")
         metar_wind.config(text="")
         metar_visibility.config(text="")
