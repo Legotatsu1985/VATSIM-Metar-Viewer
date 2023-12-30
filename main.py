@@ -162,7 +162,7 @@ def metar_find_altimeter_inHg(metar_string_text):
 
 root = tkinter.Tk()
 root.title("VATSIM Metar Fetcher")
-root.geometry("425x300")
+root.geometry("450x325")
 entry_airport_label = tkinter.Label(root, text="ICAOコードを入力→")
 entry_airport_icao = tkinter.Entry(root, width=10)
 metar_fetch_button = tkinter.Button(root, text="METARを今すぐ取得", command=fetch_metar)
