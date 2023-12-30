@@ -98,7 +98,7 @@ def metar_find_visibility(list_metar):
     if metar_visibility_raw == "9999":
         metar_visibility.config(text="10km以上")
     else:
-        metar_visibility.config(text=metar_visibility_raw + "m")
+        metar_visibility.config(text=metar_visibility_raw)
 
 def metar_find_temp_dewpoint(metar_string_text):
     temp_dewpoint_combo_MM = r'(M[0-9]{2}/M[0-9]{,3})'
@@ -136,7 +136,7 @@ def metar_find_altimeter_hPa(metar_string_text):
         hPa = res.group()[1:]
         metar_altimeter_hPa.config(text=hPa + "hPa")
     else:
-        metar_altimeter_hPa.config(text="")
+        metar_altimeter_hPa.config(text="Uncalculatable")
 
 def metar_find_altimeter_inHg(metar_string_text):
     if re.search(r'A([0-9]{4})', metar_string_text):
