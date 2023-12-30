@@ -159,7 +159,7 @@ metar_fetch_button = tkinter.Button(root, text="METARを今すぐ取得", comman
 metar_fetchstop_button = tkinter.Button(root, text="自動取得停止")
 metar_fetched_time_label_fixed_text = tkinter.Label(root, text="最終取得(ローカル時間):", justify="left")
 metar_fetched_time_label = tkinter.Label(root, justify="left")
-metar_result_string = tkinter.Label(root, justify="left", wraplength=410)
+metar_result_string = tkinter.Label(root, justify="left", wraplength=400)
 metar_obs_time = tkinter.Label(root, justify="left")
 metar_wind = tkinter.Label(root, justify="left")
 metar_visibility = tkinter.Label(root, justify="left")
