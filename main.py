@@ -124,7 +124,7 @@ def metar_find_altimeter_hPa(metar_string_text):
     if re.search(r'Q([0-9]{4})', metar_string_text):
         res = re.search(r'Q([0-9]{4})', metar_string_text)
         hPa = res.group()[1:]
-        metar_altimeter_hPa.config(text=hPa)
+        metar_altimeter_hPa.config(text=hPa + "hPa")
     else:
         metar_altimeter_hPa.config(text="")
 
@@ -135,7 +135,7 @@ def metar_find_altimeter_inHg(metar_string_text):
         QNH_first = QNH_raw[:2]
         QNH_last = QNH_raw[2:]
         QNH = QNH_first + "." + QNH_last
-        metar_altimeter_inHg.config(text=QNH)
+        metar_altimeter_inHg.config(text=QNH + "inHg")
     else:
         res = re.search(r'Q([0-9]{4})', metar_string_text)
         hPa = res.group()[1:]
@@ -146,7 +146,7 @@ def metar_find_altimeter_inHg(metar_string_text):
         for line in lines:
             if hPa in line:
                 QNH = line[5:]
-                metar_altimeter_inHg.config(text=QNH)
+                metar_altimeter_inHg.config(text=QNH + "inHg")
 
 
 
@@ -170,9 +170,8 @@ metar_temp_fixed_text = tkinter.Label(root, text="気温:", justify="left")
 metar_temp = tkinter.Label(root, justify="left")
 metar_dewpoint_fixed_text = tkinter.Label(root, text="露点:", justify="left")
 metar_dewpoint = tkinter.Label(root, justify="left")
-metar_altimeter_hPa_fixed_text = tkinter.Label(root, text="QNH(hPa):", justify="left")
+metar_altimeter_fixed_text = tkinter.Label(root, text="QNH:", justify="left")
 metar_altimeter_hPa = tkinter.Label(root, justify="left")
-metar_altimeter_inHg_fixed_text = tkinter.Label(root, text="QNH(inHg):", justify="left")
 metar_altimeter_inHg = tkinter.Label(root, justify="left")
 info_label = tkinter.Label(root, text="Made by Legotatsu with Tkinter", fg="blue", anchor=tkinter.S)
 version_label = tkinter.Label(root, text="v1.1", anchor=tkinter.SE)
@@ -193,8 +192,7 @@ metar_temp_fixed_text.grid(column=0, row=6, sticky=tkinter.E)
 metar_temp.grid(column=1, row=6, sticky=tkinter.W)
 metar_dewpoint_fixed_text.grid(column=0, row=7, sticky=tkinter.E)
 metar_dewpoint.grid(column=1, row=7, sticky=tkinter.W)
-metar_altimeter_hPa_fixed_text.grid(column=0, row=8, sticky=tkinter.E)
+metar_altimeter_fixed_text.grid(column=0, row=8, sticky=tkinter.E)
 metar_altimeter_hPa.grid(column=1, row=8, sticky=tkinter.W)
-metar_altimeter_inHg_fixed_text.grid(column=0, row=9, sticky=tkinter.E)
 metar_altimeter_inHg.grid(column=1, row=9, sticky=tkinter.W)
 root.mainloop()
