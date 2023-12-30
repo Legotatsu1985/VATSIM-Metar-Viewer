@@ -7,7 +7,7 @@ from bs4 import BeautifulSoup
 
 
 def fetch_metar():
-    if len(entry_airport_icao.get()) <= 3 or len(entry_airport_icao.get()) <= 5: #入力したICAOコードが3桁以下もしくは4桁以上の場合（ICAOコードを読み込めない）
+    if len(entry_airport_icao.get()) <= 3 or len(entry_airport_icao.get()) >= 5: #入力したICAOコードが3桁以下もしくは4桁以上の場合（ICAOコードを読み込めない）
         print("METAR not found")
         metar_auto_fetch_status.config(text="自動取得オフ", fg="red")
         metar_fetched_time_label.config(text="")
