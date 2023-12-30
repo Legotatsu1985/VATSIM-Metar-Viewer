@@ -53,7 +53,8 @@ def metar_find_wind(list_metar):
     wind_direction = metar_wind_raw[0:3]
     wind_speed = metar_wind_raw[3:5]
     if metar_wind_raw[7:] == "":
-        if wind_speed <= 2:
+        wind_speed_int = int(wind_speed)
+        if wind_speed_int <= 2:
             metar_wind.config(text="微風(Calm)")
         else:
             metar_wind.config(text=wind_direction + "@" + wind_speed + "KT")
