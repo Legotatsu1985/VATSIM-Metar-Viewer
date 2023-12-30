@@ -38,8 +38,8 @@ def fetch_metar():
         metar_find_altimeter_inHg(metar_string_text)
 
 def fetch_metar_stop():
-    entry_airport_icao.delete()
-    fetch_metar(0, tkinter.END)
+    entry_airport_icao.delete(0, tkinter.END)
+    fetch_metar()
 
 def metar_find_obs_time(list_metar):
     metar_obs_time_raw = list_metar[1] #オブザベーション日時のみ取得
