@@ -16,7 +16,7 @@ def fetch_metar():
         metar_visibility.config(text="")
         metar_temp.config(text="")
         metar_dewpoint.config(text="")
-        metar_altimetar_hPa.config(text="")
+        metar_altimeter_hPa.config(text="")
         metar_altimeter_inHg.config(text="")
     else: #ICAOコードが4桁である
         url = "http://metar.vatsim.net/metar.php?id=" + entry_airport_icao.get() #VATSIMメータphpリンクとICAOコードを加算
@@ -124,9 +124,9 @@ def metar_find_altimeter_hPa(metar_string_text):
     if re.search(r'Q([0-9]{4})', metar_string_text):
         res = re.search(r'Q([0-9]{4})', metar_string_text)
         hPa = res.group()[1:]
-        metar_altimetar_hPa.config(text=hPa)
+        metar_altimeter_hPa.config(text=hPa)
     else:
-        metar_altimetar_hPa.config(text="")
+        metar_altimeter_hPa.config(text="")
 
 def metar_find_altimeter_inHg(metar_string_text):
     if re.search(r'A([0-9]{4})', metar_string_text):
@@ -160,20 +160,29 @@ metar_fetchstop_button = tkinter.Button(root, text="自動取得停止")
 metar_fetched_time_label_fixed_text = tkinter.Label(root, text="最終取得(ローカル時間):", justify="left")
 metar_fetched_time_label = tkinter.Label(root, justify="left")
 metar_result_string = tkinter.Label(root, justify="left", wraplength=400)
+metar_obs_time_fixed_text = tkinter.Label(root, text="発出時間(Zulu):", justify="left")
 metar_obs_time = tkinter.Label(root, justify="left")
+metar_wind_fixed_text = tkinter.Label(root, text="風量と風速:", justify="left")
 metar_wind = tkinter.Label(root, justify="left")
+metar_visibility_fixed_text = tkinter.Label(root, text="地上視程:", justify="left")
 metar_visibility = tkinter.Label(root, justify="left")
+metar_temp_fixed_text = tkinter.Label(root, text="気温:", justify="left")
 metar_temp = tkinter.Label(root, justify="left")
+metar_dewpoint_fixed_text = tkinter.Label(root, text="露点:", justify="left")
 metar_dewpoint = tkinter.Label(root, justify="left")
-metar_altimetar_hPa = tkinter.Label(root, justify="left")
+metar_altimeter_hPa_fixed_text = tkinter.Label(root, text="QNH(hPa):", justify="left")
+metar_altimeter_hPa = tkinter.Label(root, justify="left")
+metar_altimeter_inHg_fixed_text = tkinter.Label(root, text="QNH(inHg):", justify="left")
 metar_altimeter_inHg = tkinter.Label(root, justify="left")
 info_label = tkinter.Label(root, text="Made by Legotatsu with Tkinter", fg="blue", anchor=tkinter.S)
 version_label = tkinter.Label(root, text="v1.1", anchor=tkinter.SE)
-entry_airport_label.grid(column=0, row=0)
+entry_airport_label.grid(column=0, row=0, sticky=tkinter.E)
 entry_airport_icao.grid(column=1, row=0)
 metar_fetch_button.grid(column=2, row=0)
 metar_fetchstop_button.grid(column=3, row=0)
 metar_fetched_time_label_fixed_text.grid(column=0, row=1, sticky=tkinter.E)
 metar_fetched_time_label.grid(column=1, columnspan=2, row=1, sticky=tkinter.W)
 metar_result_string.grid(column=0, columnspan=5, row=2, sticky=tkinter.W)
+metar_obs_time_fixed_text.grid(column=0, row=3, sticky=tkinter.E)
+metar_obs_time.grid(column=2, row=3, sticky=tkinter.W)
 root.mainloop()
