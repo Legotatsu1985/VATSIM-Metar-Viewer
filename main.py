@@ -39,7 +39,7 @@ def fetch_metar():
 
 def fetch_metar_stop():
     entry_airport_icao.delete()
-    fetch_metar()
+    fetch_metar(0, tkinter.END)
 
 def metar_find_obs_time(list_metar):
     metar_obs_time_raw = list_metar[1] #オブザベーション日時のみ取得
