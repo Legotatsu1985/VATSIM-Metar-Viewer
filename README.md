@@ -1,4 +1,4 @@
-# VATSIMメーターフェッチャー
+# VATSIMメータービュアー
  [![GitHub all releases](https://img.shields.io/github/downloads/Legotatsu1985/VATSIM-Metar-Fetcher/total)](https://github.com/Legotatsu1985/VATSIM-Metar-Fetcher/releases)
 
  このソフトはVATSIMのMETARを自動取得し、空港の風情報やQNHなどをすぐにチェックできる簡易ソフトです。管制官とパイロット両方でご利用いただけます。
